@@ -19,21 +19,9 @@
     gap: 0.5rem;
 }
 
-.labelStyles {
-    font-weight: 600;
-}
-
 .formTitle {
     margin: 0;
     margin-bottom: 1rem;
-}
-
-.formInput {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 0.5rem;
-    min-width: 350px;
-    gap: 0.5rem;
 }
 
 .outerFormButton {
@@ -44,34 +32,11 @@
     gap: 1rem;
 }
 
-
-.inputStyles {
-    border: 1px solid #2f5d7c;
-    border-radius: 5px;
-    padding: 10px 5px;
-    cursor: text;
-}
-
-.noValIntroduced {
-    display: none;
-    margin: 0;
-    font-size: 13px;
-    line-height: 16px;
-    margin-top: 8px;
-    text-align: left;
-    color: #f02849;
-}
-
 @media screen and (max-width: 490px) {
     .formInnerContainer {
         min-width: fit-content;
         margin: 1.5rem 3rem;
     }
-
-    .formInput {
-        min-width: 0px;
-    }
-
 
     .outerFormButton {
         flex-flow: column;

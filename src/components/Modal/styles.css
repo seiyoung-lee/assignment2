@@ -1,0 +1,102 @@
+.outsideModal {
+    position: fixed;
+    z-index: 1300;
+    inset: 0px;
+}
+
+.outsideModalInner {
+    position: fixed;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    inset: 0px;
+    background-color: rgba(0, 0, 0, 0.5);
+    -webkit-tap-highlight-color: transparent;
+}
+
+.modalContentOutside {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    background-color: #f1f1f1;
+    border: 3px solid #f1f1f1;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 11px 15px -7px, rgba(0, 0, 0, 0.14) 0px 24px 38px 3px, rgba(0, 0, 0, 0.12) 0px 9px 46px 8px;
+    padding: 32px;
+    opacity: 1;
+    transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+}
+
+.modalContentVals {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0.5rem;
+    width: 100%;
+    gap: 0.5rem;
+}
+
+.labelStylesModal {
+    font-weight: 600;
+}
+
+.elementModal {
+    border: 1px solid #2f5d7c;
+    border-radius: 5px;
+    padding: 10px 5px;
+    cursor: text;
+    font-family: unset;
+    margin: 0px;
+    color: unset;
+}
+
+.topOfModal {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.close-button {
+    font-size: 35px;
+    cursor: pointer;
+}
+
+.modalContentButtons {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.modalButton {
+    background-color: #2f5d7c;
+    color: white;
+}
+
+.modalContentImage {
+    display: flex;
+    justify-content: center;
+    flex: 0 0 auto;
+    height: 100px;
+    border-radius: 5px 0 0 5px;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+}
+
+.modalContentImage img {
+    width: auto;
+    height: 100px;
+}
+
+@media screen and (max-width: 490px) {
+    .modalContentOutside {
+        width: 300px;
+    }
+}
+
+@media screen and (max-width: 390px) {
+    .modalContentOutside {
+        width: 250px;
+    }
+}
+

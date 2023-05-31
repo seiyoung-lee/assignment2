@@ -1,5 +1,6 @@
 import React, { useState }  from 'react';
 import Button from '../Button';
+import FormInput from '../FormInput';
 import "./styles.css";
 
 const InventoryForm = () => {
@@ -8,21 +9,6 @@ const InventoryForm = () => {
     const [priceValue, setPriceValue] = useState('');
     const [imgValue, setImgValue] = useState('');
 
-    const handleNameChange = (event) => {
-        setNameValue(event.target.value);
-    };
-
-    const handleDescChange = (event) => {
-        setDescValue(event.target.value);
-    };
-
-    const handlePriceChange = (event) => {
-        setPriceValue(event.target.value);
-    };
-
-    const handleImgChange = (event) => {
-        setImgValue(event.target.value);
-    };
     
     return (
         <div className = "formOuterContainer">
@@ -30,32 +16,16 @@ const InventoryForm = () => {
                 <h3 className="formTitle">
                     New Inventory
                 </h3>
-                <form id="productForm">
-                    <div className = "formInput">
-                        <label className='labelStyles' >Name:</label>
-                        <input type="text" className = "inputStyles" value={nameValue} onChange={handleNameChange}/>
-                        <span className = "noValIntroduced" id = "errorName">Introduce a value</span>
-                    </div>
-                    <div className = "formInput">
-                        <label className='labelStyles' >Description:</label>
-                        <input type="text" className = "inputStyles" value={descValue} onChange={handleDescChange}></input>
-                        <span className = "noValIntroduced" id = "errorDesc">Introduce a value</span>
-                    </div>
-                    <div className = "formInput">
-                        <label className='labelStyles' >Price:</label>
-                        <input type="number" className = "inputStyles" value={priceValue} onChange={handlePriceChange}/>
-                        <span className = "noValIntroduced" id = "errorPrice">Introduce a value</span>
-                    </div>
-                    <div className = "formInput">
-                        <label className='labelStyles' >Image URL:</label>
-                        <input type="text" className = "inputStyles" value={imgValue} onChange={handleImgChange} />
-                        <span className = "noValIntroduced" id = "errorImage">Introduce a value</span>
-                    </div>
+                <div id="productForm">
+                    <FormInput title = "Name" onChange = {(val) => setNameValue(val)}  value = {nameValue} error = {false} type = "text" />
+                    <FormInput title = "Description" onChange = {(val) => setDescValue(val)}  value = {descValue} error = {false} type = "text" area = {true} />
+                    <FormInput title = "Price" onChange = {(val) => setPriceValue(val)}  value = {priceValue} error = {false} type = "number" />
+                    <FormInput title = "Image URL" onChange = {(val) => setImgValue(val)}  value = {imgValue} error = {false} type = "text" />
                     <div className="outerFormButton">
                         <Button name = "Submit" onClick={() => {}} />
                         <Button name = "Reset" onClick={() => {}} />
                     </div>
-                </form>
+                </div>
             </div>
         </div>
     );
