@@ -1,0 +1,88 @@
+
+
+.elementCardContentName {
+    display: flex;
+    justify-content: space-between;
+}
+
+.elementCard {
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    padding: 20px;
+    margin: 0.5rem 1rem;
+    display: flex;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    align-items: center;
+    min-width: 280px;
+}
+
+.elementCardimage {
+    flex: 0 0 auto;
+    width: 100px;
+    height: 100px;
+    border-radius: 5px 0 0 5px;
+    overflow: hidden;
+}
+
+.elementCardimage img {
+    width: auto;
+    height: 100px;
+}
+
+.elementCardContent {
+    flex: 1;
+    padding: 0px 20px;
+}
+
+.elementCardButtons {
+    width: 100%;
+    display: flex;
+    gap: 0.5rem;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-content: flex-end;
+}
+
+.DeleteButton {
+    background-color: #b2102f;
+    color: white;
+    min-width: 100px;
+}
+
+.infoButton {
+    background-color: #2f5d7c;;
+    color: white;
+    min-width: 100px;
+}
+
+@media screen and (max-width: 490px) {
+
+    .elementCard {
+        padding: 20px 0px;
+        min-width: 200px;
+        flex-flow: column;
+    }
+
+    .elementCardimage {
+        display: flex;
+        justify-content: center;
+    }
+
+    .elementCardContentName {
+        justify-content: center;
+    }
+
+    .elementCard {
+        text-align: center;
+    }
+
+}
+
+@media screen and (max-width: 370px) {
+    .elementCard {
+        min-width: 165px;
+    }
+    .elementCardContentName {
+        flex-flow: column;
+    }
+}

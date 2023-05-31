@@ -1,0 +1,99 @@
+.inventoryOuterContainer {
+    display: flex;
+    justify-content: center;
+    /* background-color: #2f5d7c; */
+
+    /* Optional: You can also add some styles to center the image within the container */
+    padding: 1.5rem 3rem;  
+}
+
+.inventoryInnerContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: #2f5d7c solid 2px;
+    box-shadow: 0 2px 4px #2f5d7c;
+    padding: 1.5rem 3rem;
+    border-radius: 5px;
+    min-width: 360px;
+    gap: 0.5rem;
+}
+
+.inventoryTitle {
+    margin: 0;
+}
+
+.buttonsSortOuter {
+    width: 100%;
+}
+
+.buttonsSortInner {
+    margin: 0.5rem 0rem;
+    display: flex;
+    gap: 1rem;
+}
+
+
+.dropdownStyles{
+    border-color: #2f5d7c;
+    border-radius: 5px;
+    text-align: center;
+    width: fit-content;
+    padding: 10px 5px;
+}
+
+.inventoryDataDesc {
+    width: 100%;
+    text-align: right;
+    font-size: 12px;
+    margin: 1rem 0rem;
+}
+
+.inventoryDataDesc p {
+    margin: 0px;
+    margin-bottom: -1.75rem;
+}
+
+.noShow {
+    width: 100%;
+    text-align: center;
+    font-weight: 800;
+}
+
+.noShow p {
+    color: red;
+}
+.listItems {
+    list-style: none; /* Remove default bullet points */
+    padding: 0;
+    margin: 0;
+    border: #2f5d7c solid 1px;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.outerFormButtonInventory {
+    display: flex;
+    justify-content: end;
+    width: 100%;
+    margin: 0.5rem 0;
+}
+
+
+@media screen and (max-width: 490px) {
+    .inventoryInnerContainer {
+        min-width: fit-content;
+        margin: 1.5rem 3rem;
+    }
+
+    .buttonsSortInner {
+        flex-flow: column;
+        gap: 0.5rem;
+    }
+
+    .outerFormButton {
+        flex-flow: column;
+        gap: 0.5rem;
+        align-items: end;
+    }
+}
