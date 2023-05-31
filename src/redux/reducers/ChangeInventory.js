@@ -14,15 +14,24 @@ const initialState = {
 };
 
 const ChangeInventory = (state = initialState, action) => {
-	switch(action.type) {
+	console.log(state);
+            console.log(action);
+    switch(action.type) {
         case 'ADD_INVENTORY':
-            const indexADD = action.payload.index;
-            const newInventoryADD = action.payload.inventory;
-            const currentStateADD = {
-                ...state
+            const currentInventory = {
+                ...state["inventoryState"]
             };
-            currentStateADD["inventoryState"][indexADD] = newInventoryADD;
-            return currentStateADD;
+            let index = Object.keys(currentInventory).length;
+            while (index in currentInventory) {
+                index++;
+            }
+            const indexADD = index;
+            const newInventoryADD = action.payload.inventory;
+            currentInventory[indexADD] = newInventoryADD;
+            return {
+                ...state,
+                inventoryState: currentInventory
+            };
         case 'DEL_INVENTORY':
                 const indexDEL = action.payload.index;
                 const currentStateDEL = {

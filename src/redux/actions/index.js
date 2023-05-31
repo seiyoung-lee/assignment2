@@ -1,8 +1,7 @@
-export const add_inventory = (index, inventory) => {
+export const add_inventory = (inventory) => {
 	return {
 		type: 'ADD_INVENTORY',
 		payload: {
-            index,
             inventory
         }
 	};

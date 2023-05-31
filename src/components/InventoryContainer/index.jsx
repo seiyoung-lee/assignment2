@@ -20,13 +20,17 @@ const InventoryContainer = () => {
     useEffect(() => {
         const arrayOfItems = [];
         for (const key in inventoryState) {
-            arrayOfItems.push(inventoryState[key]);
+            const pushedElement = {
+                ...inventoryState[key]
+            }
+            pushedElement["index"] = key;
+            arrayOfItems.push(pushedElement);
         }
         setInventoryItems(arrayOfItems);
         setShowingInventoryItems(arrayOfItems);
     }, [inventoryState]);
 
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
 
     const openModal = (currName, currDescription, currPrice,  currImage) => {
         setName(currName);
@@ -64,7 +68,8 @@ const InventoryContainer = () => {
                     {showingInventoryItems.length > 0 ? 
                         showingInventoryItems.map((item) => (
                             <Card 
-                                name = {item.name} 
+                                key = {item.index} 
+                                name = {item.name}
                                 imageURL = {item.imageURL}
                                 showModal = {() => {
                                     console.log("openModal");
