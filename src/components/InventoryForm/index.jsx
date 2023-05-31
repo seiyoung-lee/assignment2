@@ -38,7 +38,7 @@ const InventoryForm = () => {
         if (descValue === "") {
             forgot++;
         }
-        if (priceValue == 0) {
+        if (priceValue === 0) {
             forgot++;
         }
         if (imgValue === "") {

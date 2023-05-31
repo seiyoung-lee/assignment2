@@ -12,35 +12,40 @@ const initialState = {
         0: initialOject,
     }
 };
+const emptyState = {
+    inventoryState: {}
+}
 
 const ChangeInventory = (state = initialState, action) => {
-	console.log(state);
-            console.log(action);
     switch(action.type) {
         case 'ADD_INVENTORY':
-            const currentInventory = {
+            const currentInventoryADD = {
                 ...state["inventoryState"]
             };
-            let index = Object.keys(currentInventory).length;
-            while (index in currentInventory) {
+            let index = Object.keys(currentInventoryADD).length;
+            while (index in currentInventoryADD) {
                 index++;
             }
             const indexADD = index;
             const newInventoryADD = action.payload.inventory;
-            currentInventory[indexADD] = newInventoryADD;
+            currentInventoryADD[indexADD] = newInventoryADD;
             return {
                 ...state,
-                inventoryState: currentInventory
+                inventoryState: currentInventoryADD
             };
         case 'DEL_INVENTORY':
                 const indexDEL = action.payload.index;
-                const currentStateDEL = {
-                    ...state
+                const currentInventoryDEL = {
+                    ...state["inventoryState"]
                 };
-                delete currentStateDEL["inventoryState"][indexDEL];
-                return currentStateDEL;
+                currentInventoryDEL[indexDEL] = {};
+                delete currentInventoryDEL[indexDEL];
+                return {
+                    ...state,
+                    inventoryState: currentInventoryDEL
+                };
         case 'EMPTY_INVENTORY':
-                return initialState;
+                return emptyState;
 		default:
 			return state;
 	}

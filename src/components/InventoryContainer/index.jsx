@@ -4,16 +4,21 @@ import {useSelector, useDispatch} from 'react-redux';
 import Card from '../Card';
 import Modal from '../Modal';
 
+import { del_inventory, clear_inventory} from "../../redux/actions";
+
 import "./styles.css";
 
 const InventoryContainer = () => {
-    const [inventoryItems, setInventoryItems] = useState([]);
-    const [open, setOpen] = useState(false);
-    const [showingInventoryItems, setShowingInventoryItems] = useState([]);
     const [name, setName] = useState("");
     const [price, setPrice] = useState("");
     const [description, setDescription] = useState("");
     const [image, setImage] = useState("");
+    const [searchSelectVal, setSearchSelectVal] = useState("name");
+    const [searchVal, setSearchVal] = useState("");
+    const [sortSelectVal, setSortSelectVal] = useState("increase");
+    const [inventoryItems, setInventoryItems] = useState([]);
+    const [open, setOpen] = useState(false);
+    const [showingInventoryItems, setShowingInventoryItems] = useState([]);
 
     const inventoryState = useSelector(state => state.ChangeInventory.inventoryState);
 
@@ -40,6 +45,22 @@ const InventoryContainer = () => {
         setOpen(true);
     }
 
+    const handleSortSelectChange = (e) => {
+        setSortSelectVal(e.target.value);
+    }
+
+    const handleSearchSelectChange = (e) => {
+        setSearchSelectVal(e.target.value);
+    }
+
+    const handleSearchInputChange = (e) => {
+        const searchedOrSortedArray = inventoryItems.filter((product) => {
+            return product[searchSelectVal].toLowerCase().includes(e.target.value);
+        });
+        setShowingInventoryItems(searchedOrSortedArray);
+        setSearchVal(e.target.value);
+    }
+
     return (
         <div className = "inventoryOuterContainer">
             <div className = "inventoryInnerContainer">
@@ -48,8 +69,8 @@ const InventoryContainer = () => {
                 </h3>
                 <div className = "buttonsSortOuter">
                     <div className = "buttonsSortInner">
-                        <input type="text" placeholder="Search by..." className = "inputStyles" id = "searchInventory" />
-                        <select id="searchDropdown" className = "dropdownStyles">
+                        <input type="text" placeholder="Search by..." className = "inputStyles" value={searchVal} onChange={handleSearchInputChange}/>
+                        <select value = {searchSelectVal} className = "dropdownStyles" onChange={handleSearchSelectChange} >
                             <option value="name">name</option>
                             <option value="description">description</option>
                         </select>
@@ -58,7 +79,7 @@ const InventoryContainer = () => {
                 <div className = "buttonsSortOuter">
                     <div className = "buttonsSortInner">
                         <Button name={"Sort"}  onClick={() => {}}/>
-                        <select id="sortDropdown" className = "dropdownStyles">
+                        <select value = {sortSelectVal} className = "dropdownStyles" onChange={handleSortSelectChange}>
                             <option value="increase">Increasing Price</option>
                             <option value="decrease">Decreasing Price</option>
                         </select>
@@ -75,6 +96,9 @@ const InventoryContainer = () => {
                                     console.log("openModal");
                                     openModal(item.name, item.description, item.price, item.imageURL);
                                 }}
+                                deleteCard = {() => {
+                                    dispatch(del_inventory(item.index));
+                                }}
                             />
                         )) : 
                         <div className='noShow'>
@@ -87,12 +111,12 @@ const InventoryContainer = () => {
                 <div className='inventoryDataDesc'>
                     <div></div>
                     <p>
-                        Total Items: {inventoryItems.length} <br />
                         Items Showing: {showingInventoryItems.length} <br />
+                        Total Items: {inventoryItems.length}
                     </p>
                 </div>
                 <div className="outerFormButtonInventory">
-                    <Button name={"Delete All"}  onClick={() => {}}/>
+                    <Button name={"Delete All"}  onClick={() => dispatch(clear_inventory())}/>
                 </div>
             </div>
             <Modal 

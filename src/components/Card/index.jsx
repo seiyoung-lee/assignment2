@@ -4,7 +4,7 @@ import "./styles.css";
 
 
 const Card = (props) => {
-    const {name, imageURL, showModal} = props;
+    const {name, imageURL, showModal, deleteCard} = props;
 
     return (
         <div className="elementCard">
@@ -17,7 +17,7 @@ const Card = (props) => {
                 </div>
                 <div className='elementCardButtons'>
                     <Button classNames = "infoButton" name={"More Info"} onClick={showModal}/>
-                    <Button classNames = "DeleteButton" name={"Delete"} onClick={() => {}}/>
+                    <Button classNames = "DeleteButton" name={"Delete"} onClick={deleteCard}/>
                 </div>
             </div>
         </div>
