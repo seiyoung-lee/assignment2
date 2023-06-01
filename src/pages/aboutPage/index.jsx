@@ -37,8 +37,6 @@ const AboutPage = () => {
               </p>
               
               <p>
-                CHANGE TO NEW ASSIGNMENT
-                - USED REACT HELMENT FOR TITLE AND LOGO
                 The project/assignment asks to use HTML5, CSS, and vanilla JavaScript to create a simple Inventory website.
                 It has to have a navigation bar; form containing item name, description, price, and image of item; JSON string that holds an item;
                 list of items; button to delete all items; sufficient styling; responsiveness; and finally some creative aspect that I add that is not mandatory.
