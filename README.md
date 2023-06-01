@@ -1,4 +1,4 @@
-# CPSC 455 Assignment #1
+# CPSC 455 Assignment #2
 
 ### Features that were obligatory
 
