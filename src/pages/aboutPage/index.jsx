@@ -13,10 +13,10 @@ const AboutPage = () => {
         <div className="container">
             <div className="profile-pics">
                 <div className="profile-pic">
-                    <img src={ProfilePic} alt="Profile Picture 1" className="profile-pic" />
+                    <img src={ProfilePic} alt="Profile 1" className="profile-pic" />
                 </div>
                 <div className="profile-pic">
-                    <img src={AssignmentPic} alt="Profile Picture 2" className="profile-pic" />
+                    <img src={AssignmentPic} alt="Profile 2" className="profile-pic" />
                 </div>
             </div>
             <div className="info">
