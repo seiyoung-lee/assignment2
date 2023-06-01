@@ -88,6 +88,10 @@
     height: 100px;
 }
 
+.modalFormButton {
+    margin-top: 1rem;
+}
+
 @media screen and (max-width: 490px) {
     .modalContentOutside {
         width: 300px;

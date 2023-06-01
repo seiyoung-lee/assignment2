@@ -52,8 +52,6 @@ const ChangeInventory = (state = initialState, action) => {
             };
             currentInventoryEDIT[indexEDIT] = {};
             currentInventoryEDIT[indexEDIT] = {...action.payload.inventory};
-            console.log(state["inventoryState"]);
-            console.log(action.payload);
             return {
                 ...state,
                 inventoryState: currentInventoryEDIT

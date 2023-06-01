@@ -13,10 +13,10 @@ const AboutPage = () => {
         <div className="container">
             <div className="profile-pics">
                 <div className="profile-pic">
-                    <img src={ProfilePic} alt="Profile Picture 1" className="profile-pic" />
+                    <img src={ProfilePic} alt="Profile 1" className="profile-pic" />
                 </div>
                 <div className="profile-pic">
-                    <img src={AssignmentPic} alt="Profile Picture 2" className="profile-pic" />
+                    <img src={AssignmentPic} alt="Profile 2" className="profile-pic" />
                 </div>
             </div>
             <div className="info">
@@ -37,8 +37,6 @@ const AboutPage = () => {
               </p>
               
               <p>
-                CHANGE TO NEW ASSIGNMENT
-                - USED REACT HELMENT FOR TITLE AND LOGO
                 The project/assignment asks to use ReactJS/Redux to create a simple Inventory website.
                 It has to have a form with multiple inputs; button to clear and submit; pre-loaded item to initialize reducer;
                 list of items; button to delete all items; sufficient styling; modal; and finally some creative aspect that I add that is not mandatory.
