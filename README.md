@@ -10,6 +10,7 @@
 * has appropriate styling with appropriate media querries
 * contains modal
 * shows only name and image
+* use this image https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg
 
 ### Features that were not obligatory
 
@@ -21,10 +22,11 @@
 * shows number of cards present and cards in total
 * used react-helmet for meta data
 * edit functionality of a single card in modal
+* proper organizing
 
 ### ChatGPT
 
 * Used it to get a basic layout and styling on my forms and inventory cards
 * Used it to get a basic layout of the navigation bar at the top of the page
-* for basic modal
+* for basic modal layout
 * meta data with react helmet
