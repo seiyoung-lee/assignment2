@@ -31,18 +31,22 @@ const InventoryForm = () => {
 
     const submitVal = () => {
         let forgot = 0;
-
+        let errors = {...initialError};
         if (nameValue === "") {
             forgot++;
+            errors.nameError = true;
         }
         if (descValue === "") {
             forgot++;
+            errors.descError = true;
         }
-        if (priceValue === 0) {
+        if (priceValue === "") {
             forgot++;
+            errors.priceError = true;
         }
         if (imgValue === "") {
             forgot++;
+            errors.imgError = true;
         }
         if (forgot === 0) {
             const product = {
@@ -55,6 +59,7 @@ const InventoryForm = () => {
             dispatch(add_inventory(product));
             resetVals();
         }
+        setError(errors);
     }
 
     

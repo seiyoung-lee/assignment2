@@ -4,7 +4,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import Card from '../Card';
 import Modal from '../Modal';
 
-import { del_inventory, clear_inventory} from "../../redux/actions";
+import { del_inventory, clear_inventory, edit_inventory } from "../../redux/actions";
 
 import "./styles.css";
 
@@ -13,6 +13,7 @@ const InventoryContainer = () => {
     const [price, setPrice] = useState("");
     const [description, setDescription] = useState("");
     const [image, setImage] = useState("");
+    const [index, setIndex] = useState(0);
     const [searchSelectVal, setSearchSelectVal] = useState("name");
     const [searchVal, setSearchVal] = useState("");
     const [sortSelectVal, setSortSelectVal] = useState("increase");
@@ -37,11 +38,12 @@ const InventoryContainer = () => {
 
     const dispatch = useDispatch();
 
-    const openModal = (currName, currDescription, currPrice,  currImage) => {
+    const openModal = (currName, currDescription, currPrice, currImage, currIndex) => {
         setName(currName);
         setPrice(currPrice);
         setDescription(currDescription);
         setImage(currImage);
+        setIndex(currIndex);
         setOpen(true);
     }
 
@@ -51,6 +53,30 @@ const InventoryContainer = () => {
 
     const handleSearchSelectChange = (e) => {
         setSearchSelectVal(e.target.value);
+    }
+
+    const handleSortClick = () => {
+        let sortedArray = [...showingInventoryItems];
+        if (sortSelectVal === "increase") {
+            sortedArray = sortedArray.sort((a,b) => {
+                return a["price"] > b["price"] ? 1 : -1;
+            });
+        } else {
+            sortedArray = sortedArray.sort((a,b) => {
+                return a["price"] > b["price"] ? -1 : 1;
+            });
+        }
+        setShowingInventoryItems(sortedArray);
+    }
+
+    const handleSaveEdit = (currName, currDescription, currPrice, currImage, currIndex) => {
+        const editedInv = {
+            name: currName,
+            description: currDescription,
+            price: currPrice,
+            imageURL: currImage,
+        }
+        dispatch(edit_inventory(editedInv, currIndex));
     }
 
     const handleSearchInputChange = (e) => {
@@ -78,7 +104,7 @@ const InventoryContainer = () => {
                 </div>
                 <div className = "buttonsSortOuter">
                     <div className = "buttonsSortInner">
-                        <Button name={"Sort"}  onClick={() => {}}/>
+                        <Button name={"Sort"}  onClick={handleSortClick}/>
                         <select value = {sortSelectVal} className = "dropdownStyles" onChange={handleSortSelectChange}>
                             <option value="increase">Increasing Price</option>
                             <option value="decrease">Decreasing Price</option>
@@ -93,8 +119,7 @@ const InventoryContainer = () => {
                                 name = {item.name}
                                 imageURL = {item.imageURL}
                                 showModal = {() => {
-                                    console.log("openModal");
-                                    openModal(item.name, item.description, item.price, item.imageURL);
+                                    openModal(item.name, item.description, item.price, item.imageURL, item.index);
                                 }}
                                 deleteCard = {() => {
                                     dispatch(del_inventory(item.index));
@@ -125,6 +150,9 @@ const InventoryContainer = () => {
                 image = {image}
                 name = {name}
                 price = {price}
+                handleSave = {(currName, currDescription, currPrice, currImage) => {
+                    handleSaveEdit(currName, currDescription, currPrice, currImage, index);
+                }}
                 description = {description}
             />
         </div>

@@ -18,7 +18,7 @@ const FormInput = (props) => {
                 :
                     <input type={type} className = "inputStyles" value={value} onChange={handleChange} />
             }
-            <span className = "noValIntroduced" id = "errorName">Introduce a value</span>
+            <span className = {`noValIntroduced ${error ? "noValIntroducedShow" : ""}`} id = "errorName">Introduce a value</span>
         </div>
     )
 }

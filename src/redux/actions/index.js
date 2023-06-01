@@ -16,6 +16,16 @@ export const del_inventory = (index) => {
 	};
 };
 
+export const edit_inventory = (inventory, index) => {
+	return {
+		type: 'EDIT_INVENTORY',
+		payload: {
+            inventory,
+			index
+        }
+	};
+};
+
 export const clear_inventory = () => {
 	return {
 		type: 'EMPTY_INVENTORY',

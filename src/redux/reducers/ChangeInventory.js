@@ -44,6 +44,20 @@ const ChangeInventory = (state = initialState, action) => {
                     ...state,
                     inventoryState: currentInventoryDEL
                 };
+
+        case 'EDIT_INVENTORY':
+            const indexEDIT = action.payload.index;
+            const currentInventoryEDIT = {
+                ...state["inventoryState"]
+            };
+            currentInventoryEDIT[indexEDIT] = {};
+            currentInventoryEDIT[indexEDIT] = {...action.payload.inventory};
+            console.log(state["inventoryState"]);
+            console.log(action.payload);
+            return {
+                ...state,
+                inventoryState: currentInventoryEDIT
+            };
         case 'EMPTY_INVENTORY':
                 return emptyState;
 		default:

@@ -28,6 +28,12 @@
     color: #f02849;
 }
 
+.noValIntroducedShow {
+    display: block;
+    margin: 0;
+    margin-top: -8px;
+}
+
 @media screen and (max-width: 490px) {
     .formInput {
         min-width: 0px;

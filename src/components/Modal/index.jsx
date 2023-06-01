@@ -4,7 +4,7 @@ import FormInput from '../FormInput';
 import "./styles.css";
 
 const Modal = (props) => {
-    const { isOpen, onClose, image, name, price, description } = props;
+    const { isOpen, onClose, image, name, price, description, handleSave } = props;
 
     const [editedName, setEditedName] = useState(name);
     const [editedPrice, setEditedPrice] = useState(price);
@@ -15,14 +15,10 @@ const Modal = (props) => {
 
     const modalRef = useRef(null);
 
-    const handleCloseModal = () => {
-        onClose();
-    };
-
     useEffect(() => {
         const handleOutsideClick = (event) => {
             if (modalRef.current && !modalRef.current.contains(event.target)) {
-                handleCloseModal();
+                onClose();
             }
         };
 
@@ -49,7 +45,7 @@ const Modal = (props) => {
 
     const handleSaveChanges = () => {
         // Perform save changes logic here
-        console.log('Save changes:', editedName, editedPrice, editedDescription);
+        handleSave(editedName, editedDescription, editedPrice, editedImage);
         setEdit(false);
     };
 
@@ -82,15 +78,15 @@ const Modal = (props) => {
                     <div className="modalContentVals">
                         <div className = "modalContentVals">
                             <label className='labelStylesModal' >Name:</label>
-                            <p className="elementModal">{name}</p> 
-                        </div>
-                        <div className = "modalContentVals">
-                            <label className='labelStylesModal' >Price:</label>
-                            <p className="elementModal">{editedPrice}</p> 
+                            <p className="elementModal">{editedName}</p> 
                         </div>
                         <div className = "modalContentVals">
                             <label className='labelStylesModal' >Description:</label>
                             <p className="elementModal">{editedDescription}</p> 
+                        </div>
+                        <div className = "modalContentVals">
+                            <label className='labelStylesModal' >Price:</label>
+                            <p className="elementModal">{editedPrice}</p> 
                         </div>
                         <div className='modalContentButtons'>
                             <Button classNames = "modalButton" name={"Edit"} onClick={() => {setEdit(true)}}/>
