@@ -37,10 +37,11 @@ const AboutPage = () => {
               </p>
               
               <p>
-                The project/assignment asks to use HTML5, CSS, and vanilla JavaScript to create a simple Inventory website.
-                It has to have a navigation bar; form containing item name, description, price, and image of item; JSON string that holds an item;
-                list of items; button to delete all items; sufficient styling; responsiveness; and finally some creative aspect that I add that is not mandatory.
-                The current website has all this features in addition to sorting by price, searching by name or description, and giving error messages.
+                The project/assignment asks to use ReactJS/Redux to create a simple Inventory website.
+                It has to have a form with multiple inputs; button to clear and submit; pre-loaded item to initialize reducer;
+                list of items; button to delete all items; sufficient styling; modal; and finally some creative aspect that I add that is not mandatory.
+                The current website has all this features in shows how many items are showing and are in total, error handling, editing in more info, delete
+                one item, react-helmet for meta data, searching, sorting, modal clicking outside to close, and many more.
               </p>
             </div>
         </div>
