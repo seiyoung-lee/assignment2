@@ -67,7 +67,7 @@ const InventoryForm = () => {
         <div className = "formOuterContainer">
             <div className = "formInnerContainer">
                 <h3 className="formTitle">
-                    New Inventory
+                    New Item
                 </h3>
                 <div id="productForm">
                     <FormInput title = "Name" onChange = {(val) => setNameValue(val)}  value = {nameValue} error = {errors.nameError} type = "text" />
