@@ -2,16 +2,17 @@ import React, { useState }  from 'react';
 import Button from '../Button';
 import FormInput from '../FormInput';
 import {useDispatch} from 'react-redux';
-import { add_inventory } from "../../redux/actions";
+import { addItemAsync } from '../../redux/reducers/thunks';
 import "./styles.css";
 
+const initialError = {
+    nameError: false,
+    descError: false,
+    priceError: false,
+    imgError: false,
+};
+
 const InventoryForm = () => {
-    const initialError = {
-        nameError: false,
-        descError: false,
-        priceError: false,
-        imgError: false,
-    };
 
     const [nameValue, setNameValue] = useState('');
     const [descValue, setDescValue] = useState('');
@@ -56,7 +57,7 @@ const InventoryForm = () => {
                 imageURL: imgValue
             };
             
-            dispatch(add_inventory(product));
+            dispatch(addItemAsync(product));
             resetVals();
         }
         setError(errors);
@@ -67,7 +68,7 @@ const InventoryForm = () => {
         <div className = "formOuterContainer">
             <div className = "formInnerContainer">
                 <h3 className="formTitle">
-                    New Inventory
+                    New Item
                 </h3>
                 <div id="productForm">
                     <FormInput title = "Name" onChange = {(val) => setNameValue(val)}  value = {nameValue} error = {errors.nameError} type = "text" />

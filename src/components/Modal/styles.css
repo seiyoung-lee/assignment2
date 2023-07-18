@@ -16,6 +16,10 @@
     -webkit-tap-highlight-color: transparent;
 }
 
+.elementCardTitle {
+    margin-top: 0px;
+}
+
 .modalContentOutside {
     position: absolute;
     top: 50%;
