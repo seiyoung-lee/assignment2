@@ -1,19 +1,39 @@
 import React, { useState, useEffect, useRef }  from 'react'; 
 import Button from '../Button';
 import FormInput from '../FormInput';
+import service from '../../redux/reducers/service';
 import "./styles.css";
 
 const Modal = (props) => {
-    const { isOpen, onClose, image, name, price, description, handleSave } = props;
+    const { isOpen, onClose, id, handleSave } = props;
 
-    const [editedName, setEditedName] = useState(name);
-    const [editedPrice, setEditedPrice] = useState(price);
-    const [editedDescription, setEditedDescription] = useState(description);
-    const [editedImage, setEditedImage] = useState(image);
+    const [editedName, setEditedName] = useState("");
+    const [editedPrice, setEditedPrice] = useState(0);
+    const [editedDescription, setEditedDescription] = useState("");
+    const [editedImage, setEditedImage] = useState("");
+    const [loading, setLoading] = useState(false);
     const [edit, setEdit] = useState(false);
 
 
     const modalRef = useRef(null);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            setLoading(true);
+            const data = await service.getItem(id);
+            if (data) {
+                setEditedName(data["name"]);
+                setEditedPrice(data["price"]);
+                setEditedDescription(data["description"]);
+                setEditedImage(data["imageURL"]);
+            }
+            setLoading(false);
+        }
+
+        if (id !== "") {
+            fetchData();
+        }
+    }, [id]);
 
     useEffect(() => {
         const handleOutsideClick = (event) => {
@@ -35,18 +55,13 @@ const Modal = (props) => {
 
     }, [isOpen]);
 
-    useEffect(() => {
-        setEditedName(name);
-        setEditedPrice(price);
-        setEditedDescription(description);
-        setEditedImage(image);
-    }, [name, price, description, image]);
 
-
-    const handleSaveChanges = () => {
+    const handleSaveChanges = async () => {
         // Perform save changes logic here
-        handleSave(editedName, editedDescription, editedPrice, editedImage);
+        setLoading(true);
+        await handleSave(editedName, editedDescription, editedPrice, editedImage);
         setEdit(false);
+        setLoading(false);
     };
 
     if (!isOpen) {

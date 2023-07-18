@@ -7,43 +7,34 @@ import Modal from '../Modal';
 import { del_inventory, clear_inventory, edit_inventory } from "../../redux/actions";
 
 import "./styles.css";
+import { deleteItemAsync, deleteItemsAsync, editItemAsync, getItemsAsync } from '../../redux/reducers/thunks';
 
 const InventoryContainer = () => {
-    const [name, setName] = useState("");
-    const [price, setPrice] = useState("");
-    const [description, setDescription] = useState("");
-    const [image, setImage] = useState("");
-    const [index, setIndex] = useState(0);
-    const [searchSelectVal, setSearchSelectVal] = useState("name");
+    const [id, setId] = useState("");
     const [searchVal, setSearchVal] = useState("");
     const [sortSelectVal, setSortSelectVal] = useState("increase");
     const [inventoryItems, setInventoryItems] = useState([]);
     const [open, setOpen] = useState(false);
     const [showingInventoryItems, setShowingInventoryItems] = useState([]);
 
-    const inventoryState = useSelector(state => state.ChangeInventory.inventoryState);
+    const inventoryState = useSelector(state => state.inventory);
 
     useEffect(() => {
-        const arrayOfItems = [];
-        for (const key in inventoryState) {
-            const pushedElement = {
-                ...inventoryState[key]
-            }
-            pushedElement["index"] = key;
-            arrayOfItems.push(pushedElement);
-        }
-        setInventoryItems(arrayOfItems);
-        setShowingInventoryItems(arrayOfItems);
-    }, [inventoryState]);
+        console.log(inventoryState);
+        dispatch(getItemsAsync());
+        setInventoryItems(inventoryState.items);
+        setShowingInventoryItems(inventoryState.items);
+    }, []);
+
+    useEffect(() => {
+        setInventoryItems(inventoryState.items);
+        setShowingInventoryItems(inventoryState.items);
+    }, [inventoryState.items]);
 
     const dispatch = useDispatch();
 
-    const openModal = (currName, currDescription, currPrice, currImage, currIndex) => {
-        setName(currName);
-        setPrice(currPrice);
-        setDescription(currDescription);
-        setImage(currImage);
-        setIndex(currIndex);
+    const openModal = (currID) => {
+        setId(currID);
         setOpen(true);
     }
 
@@ -51,37 +42,31 @@ const InventoryContainer = () => {
         setSortSelectVal(e.target.value);
     }
 
-    const handleSearchSelectChange = (e) => {
-        setSearchSelectVal(e.target.value);
-    }
-
     const handleSortClick = () => {
-        let sortedArray = [...showingInventoryItems];
         if (sortSelectVal === "increase") {
-            sortedArray = sortedArray.sort((a,b) => {
-                return a["price"] > b["price"] ? 1 : -1;
-            });
+            dispatch(getItemsAsync(1));
         } else {
-            sortedArray = sortedArray.sort((a,b) => {
-                return a["price"] > b["price"] ? -1 : 1;
-            });
+            dispatch(getItemsAsync(-1));
         }
-        setShowingInventoryItems(sortedArray);
     }
 
-    const handleSaveEdit = (currName, currDescription, currPrice, currImage, currIndex) => {
+    const handleSaveEdit = async (currName, currDescription, currPrice, currImage, currID) => {
         const editedInv = {
             name: currName,
             description: currDescription,
             price: currPrice,
             imageURL: currImage,
         }
-        dispatch(edit_inventory(editedInv, currIndex));
+        const payload = {
+            item: editedInv,
+            id: currID
+        }
+        return await dispatch(editItemAsync(payload));
     }
 
     const handleSearchInputChange = (e) => {
         const searchedOrSortedArray = inventoryItems.filter((product) => {
-            return product[searchSelectVal].toLowerCase().includes(e.target.value);
+            return product['name'].toLowerCase().includes(e.target.value);
         });
         setShowingInventoryItems(searchedOrSortedArray);
         setSearchVal(e.target.value);
@@ -95,11 +80,7 @@ const InventoryContainer = () => {
                 </h3>
                 <div className = "buttonsSortOuter">
                     <div className = "buttonsSortInner">
-                        <input type="text" placeholder="Search by..." className = "inputStyles" value={searchVal} onChange={handleSearchInputChange}/>
-                        <select value = {searchSelectVal} className = "dropdownStyles" onChange={handleSearchSelectChange} >
-                            <option value="name">name</option>
-                            <option value="description">description</option>
-                        </select>
+                        <input type="text" placeholder="Search by name..." className = "inputStyles" value={searchVal} onChange={handleSearchInputChange}/>
                     </div>
                 </div>
                 <div className = "buttonsSortOuter">
@@ -115,14 +96,14 @@ const InventoryContainer = () => {
                     {showingInventoryItems.length > 0 ? 
                         showingInventoryItems.map((item) => (
                             <Card 
-                                key = {item.index} 
+                                key = {item.id} 
                                 name = {item.name}
                                 imageURL = {item.imageURL}
                                 showModal = {() => {
-                                    openModal(item.name, item.description, item.price, item.imageURL, item.index);
+                                    openModal(item.id);
                                 }}
                                 deleteCard = {() => {
-                                    dispatch(del_inventory(item.index));
+                                    dispatch(deleteItemAsync(item.id));
                                 }}
                             />
                         )) : 
@@ -141,19 +122,16 @@ const InventoryContainer = () => {
                     </p>
                 </div>
                 <div className="outerFormButtonInventory">
-                    <Button name={"Delete All"}  onClick={() => dispatch(clear_inventory())}/>
+                    <Button name={"Delete All"}  onClick={() => dispatch(deleteItemsAsync(inventoryItems))}/>
                 </div>
             </div>
             <Modal 
                 isOpen = {open}
                 onClose = {() => setOpen(false)}
-                image = {image}
-                name = {name}
-                price = {price}
-                handleSave = {(currName, currDescription, currPrice, currImage) => {
-                    handleSaveEdit(currName, currDescription, currPrice, currImage, index);
+                id = {id}
+                handleSave = {async (currName, currDescription, currPrice, currImage) => {
+                    return await handleSaveEdit(currName, currDescription, currPrice, currImage, id);
                 }}
-                description = {description}
             />
         </div>
     )
