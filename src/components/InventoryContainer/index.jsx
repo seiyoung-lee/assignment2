@@ -24,7 +24,6 @@ const InventoryContainer = () => {
         dispatch(getItemsAsync());
         setInventoryItems(inventoryState.items);
         setShowingInventoryItems(inventoryState.items);
-        console.log(process.env);
     }, []);
 
     useEffect(() => {
